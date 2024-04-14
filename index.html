@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST Countries</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    :root {
+        --Dark-Blue : hsl(209, 23%, 22%)         ;       /*           (Dark Mode Elements)    */
+        --Very-Dark-Blue : hsl(207, 26%, 17%)    ;       /*               (Dark Mode Background)    */
+        --Very-Dark-Blue : hsl(200, 15%, 8%)     ;       /*               (Light Mode Text)    */
+        --Dark-Gray : hsl(0, 0%, 52%)            ;       /*       (Light Mode Input)    */
+        --Very-Light-Gray : hsl(0, 0%, 98%)      ;       /*           (Light Mode Background)    */
+        --White : hsl(0, 0%, 100%)               ;       /*   (Dark Mode Text & Light Mode Elements)    */
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--Very-Light-Gray);
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+        --padding : 10%
+    }
+
+    nav {
+        background-color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem var(--padding);
+        margin-bottom: 1rem;
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.349);
+
+    }
+
+    nav .title {
+        font-weight: bold;
+    }
+
+    nav .modeSwitch .modeText {
+        margin-left: 1rem;
+        font-weight: 500;
+    }
+
+
+    main {
+        padding: 1rem  var(--padding);
+    }
+    main .filterSaerch {
+        display: grid;
+        grid-template-columns: repeat(auto-fit , minmax(50% , 1fr));
+    }
+
+    main .search {
+        position: relative;
+    }
+    main .search input {
+        padding: 1rem 1rem 1rem 3.5rem;
+        width: 50%;
+        border: none;
+        border-radius: 2px;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.1) , 0 0 3px rgba(0, 0, 0, 0.1);
+    }
+
+    main .search span {
+        position: absolute;
+        left: 1.5rem;
+        top: .8rem;
+    }
+
+    main .filter {
+        padding: 1rem;
+        width: 25%;
+        border-radius: 2px;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.1) , 0 0 3px rgba(0, 0, 0, 0.1);
+        margin-left: auto;
+        position: relative;
+        cursor: pointer;
+    }
+
+
+    main .filter .dropdownList {
+        position: absolute;
+        top: 110%;
+        right: 0;
+        left: 0;
+        height: 0%;
+        overflow: hidden;
+        background-color: white;
+        border-radius: 2px;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.1) , 0 0 3px rgba(0, 0, 0, 0.1);
+        z-index: 1000000;
+        transition: .5s ease-in-out;
+    }
+    main .filter .dropdownList .listItem {
+        padding: .5rem 1rem ;
+    }
+
+    main .filter .dropdownList .listItem:hover {
+        background-color: rgba(0, 0, 0, 0.11);
+    }
+
+    main .filter i {
+        float: right;
+    }
+
+    main .countries {
+        padding: 1rem  0;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: repeat(auto-fit , minmax(250px , 1fr));
+        gap: 1rem;
+    }
+
+    main .countries .card {
+        background-color: white;
+        cursor: pointer;
+    }
+
+    main .countries .card:hover {
+        transform: scale(.95);
+    }
+
+    main .countries .card:active {
+        transform: scale(1);
+    }
+    main .countries .card img{
+        width: 100%;
+        height: 100%;
+    }
+
+    main .countries .card .cardBody {
+        padding: 1rem;
+    }
+
+    main .countries .card .cardHead {
+        font-weight: bold;
+        font-size: x-large;
+        padding: 1rem 0;
+    }
+
+    main .countries .card .cardInfo p {
+        font-weight: 500;
+    }
+    main .countries .card .cardInfo p span {
+        color: var(--Dark-Gray);
+    }
+
+</style>
+<body>
+    
+    <nav>
+        <div class="title">
+            Where In The world?
+        </div>
+        <div class="modeSwitch">
+            <span class="modeIcon"><i class="fa-regular fa-moon"></i></span>
+            <span class="modeText">Dark Mode</span>
+        </div>
+    </nav>
+    
+    <main>
+        <section class="filterSaerch">
+            <div class="search">
+                <input type="search" name="" id="" placeholder="Search for a county..."> 
+                <span><i class="fa-solid fa-magnifying-glass"></i></span>
+            </div>
+            <div class="filter">
+                <span class="filterValue">Filter By Region</span>
+                <span><i class="fa-solid fa-angle-down"></i></span>
+                <div class="dropdownList">
+                    <div class="listItem">All</div>
+                    <div class="listItem">Africa</div>
+                    <div class="listItem">America</div>
+                    <div class="listItem">Asia</div>
+                    <div class="listItem">Europe</div>
+                    <div class="listItem">Oceania</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="countries">
+
+        </section>
+
+    
+    
+    
+    
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <script src="https://kit.fontawesome.com/9992a75c8c.js" crossorigin="anonymous"></script>
+    <script type="module">
+        import data from './data.json' assert { type: 'json' };
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+        // filter dropdown list //
+        const filter = document.querySelector('main .filter');
+        const dropdownList = document.querySelector('.filter .dropdownList')
+        const listItems = document.querySelectorAll('.filter .listItem')
+        let listItemValue = 'All' ;                  // to use it in filter
+        filter.addEventListener('click' , () => {
+            if (dropdownList.clientHeight == 0) {
+                dropdownList.style.height = '180px'
+            } else {
+                dropdownList.style.height = '0%'
+            }
+        })
+
+        listItems.forEach((listItem) => {
+            listItem.addEventListener('click' , (e) => {
+                const filterValue = document.querySelector('.filterValue')
+                listItemValue = e.target.innerHTML
+                getDataAndShow()
+                filterValue.innerHTML = listItemValue
+            })
+        })
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+    // read data form json file 
+    function getDataAndShow(){
+    const listSection = document.querySelector('main .countries')
+    listSection.innerHTML = ''
+    for (const country of data) {
+        if (listItemValue != 'All') {
+            if (country.region != listItemValue) { continue }
+            listSection.innerHTML += `
+                <div class="card">
+                    <div class="cardImg">
+                        <img src="${country.flags.png}" alt="">
+                    </div>
+                    <div class="cardBody">
+                        <div class="cardHead">${country.name}</div>
+                        <div class="cardInfo">
+                            <p>Population: <span>${country.population}</span></p>
+                            <p>Region: <span>${country.region}</span></p>
+                            <p>Capital: <span>${country.capital}</span></p>
+                        </div>
+                    </div>
+                </div>
+            `
+        } else {
+            listSection.innerHTML += `
+                <div class="card">
+                    <div class="cardImg">
+                        <img src="${country.flags.png}" alt="">
+                    </div>
+                    <div class="cardBody">
+                        <div class="cardHead">${country.name}</div>
+                        <div class="cardInfo">
+                            <p>Population: <span>${country.population}</span></p>
+                            <p>Region: <span>${country.region}</span></p>
+                            <p>Capital: <span>${country.capital}</span></p>
+                        </div>
+                    </div>
+                </div>
+            `
+        }
+    }
+    }
+    getDataAndShow()
+    </script>
+</body>
+</html>
