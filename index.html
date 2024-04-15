@@ -87,6 +87,20 @@
         position: relative;
         cursor: pointer;
     }
+    
+    @media (max-width : 450px) {
+        main .filterSaerch {
+            gap: 1rem;
+        }
+        main .search input {
+        width: auto;
+        }
+
+        main .filter {
+        width: auto;
+        margin-left: 0;
+        }
+    }
 
 
     main .filter .dropdownList {
@@ -112,6 +126,7 @@
 
     main .filter i {
         float: right;
+        transition: .5s ease;
     }
 
     main .countries {
@@ -177,11 +192,11 @@
             </div>
             <div class="filter">
                 <span class="filterValue">Filter By Region</span>
-                <span><i class="fa-solid fa-angle-down"></i></span>
+                <i class="fa-solid fa-angle-down"></i>
                 <div class="dropdownList">
                     <div class="listItem">All</div>
                     <div class="listItem">Africa</div>
-                    <div class="listItem">America</div>
+                    <div class="listItem">Americas</div>
                     <div class="listItem">Asia</div>
                     <div class="listItem">Europe</div>
                     <div class="listItem">Oceania</div>
@@ -221,17 +236,33 @@
     /////////////////////////////////////////////////////////////////////////////////////////
         // filter dropdown list //
         const filter = document.querySelector('main .filter');
+        const icon = document.querySelector('main .filter i')
         const dropdownList = document.querySelector('.filter .dropdownList')
         const listItems = document.querySelectorAll('.filter .listItem')
         let listItemValue = 'All' ;                  // to use it in filter
+
+        // toggle dropdownList 
         filter.addEventListener('click' , () => {
             if (dropdownList.clientHeight == 0) {
+                icon.style.transform = 'rotate(180deg)'
                 dropdownList.style.height = '180px'
             } else {
+                icon.style.transform = 'rotate(0deg)'
                 dropdownList.style.height = '0%'
             }
         })
 
+        // close dropdownList
+        document.addEventListener('click' , (e) => {
+            if (e.target != filter || e.target.parentElement != filter ) {
+                if (dropdownList.clientHeight == 180) {
+                    icon.style.transform = 'rotate(0deg)'
+                    dropdownList.style.height = '0%'
+                }
+            }
+        })
+
+        // getting the value to filter 
         listItems.forEach((listItem) => {
             listItem.addEventListener('click' , (e) => {
                 const filterValue = document.querySelector('.filterValue')
@@ -240,6 +271,7 @@
                 filterValue.innerHTML = listItemValue
             })
         })
+
 
     /////////////////////////////////////////////////////////////////////////////////////////
     // read data form json file 
