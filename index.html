@@ -11,10 +11,14 @@
     :root {
         --Dark-Blue : hsl(209, 23%, 22%)         ;       /*           (Dark Mode Elements)    */
         --Very-Dark-Blue : hsl(207, 26%, 17%)    ;       /*               (Dark Mode Background)    */
-        --Very-Dark-Blue : hsl(200, 15%, 8%)     ;       /*               (Light Mode Text)    */
+                                                           /*               (Light Mode Text)    */
         --Dark-Gray : hsl(0, 0%, 52%)            ;       /*       (Light Mode Input)    */
         --Very-Light-Gray : hsl(0, 0%, 98%)      ;       /*           (Light Mode Background)    */
         --White : hsl(0, 0%, 100%)               ;       /*   (Dark Mode Text & Light Mode Elements)    */
+        --black:hsl(0, 0%, 0%) ;
+        --bg:var(--Very-Light-Gray);
+        --elme:var(--White);
+        --textColor:var(--black);
     }
 
     * {
@@ -25,7 +29,7 @@
 
     body {
         font-family: "Inter", sans-serif;
-        background-color: var(--Very-Light-Gray);
+        background-color: var(--bg);
         height: 100vh;
         padding: 0;
         margin: 0;
@@ -33,7 +37,8 @@
     }
 
     nav {
-        background-color: white;
+        background-color: var(--elme);
+        color: var(--textColor);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -45,6 +50,10 @@
 
     nav .title {
         font-weight: bold;
+    }
+
+    nav .modeSwitch {
+        cursor: pointer;
     }
 
     nav .modeSwitch .modeText {
@@ -70,6 +79,8 @@
         border: none;
         border-radius: 2px;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.1) , 0 0 3px rgba(0, 0, 0, 0.1);
+        background-color: var(--elme);
+        color: var(--textColor);
     }
 
     main .search span {
@@ -86,6 +97,8 @@
         margin-left: auto;
         position: relative;
         cursor: pointer;
+        background-color: var(--elme);
+        color: var(--textColor);
     }
     
     @media (max-width : 450px) {
@@ -110,7 +123,8 @@
         left: 0;
         height: 0%;
         overflow: hidden;
-        background-color: white;
+        background-color: inherit;
+        color: inherit;
         border-radius: 2px;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.1) , 0 0 3px rgba(0, 0, 0, 0.1);
         z-index: 1000000;
@@ -134,12 +148,14 @@
         box-sizing: border-box;
         display: grid;
         grid-template-columns: repeat(auto-fit , minmax(250px , 1fr));
-        gap: 1rem;
+        gap: 2rem;
     }
 
     main .countries .card {
-        background-color: white;
+        border-radius: 1rem;
         cursor: pointer;
+        background-color: var(--elme);
+        color: var(--textColor);
     }
 
     main .countries .card:hover {
@@ -150,6 +166,7 @@
         transform: scale(1);
     }
     main .countries .card img{
+        border-radius: 1rem 1rem 0 0;
         width: 100%;
         height: 100%;
     }
@@ -178,7 +195,7 @@
         <div class="title">
             Where In The world?
         </div>
-        <div class="modeSwitch">
+        <div class="modeSwitch" mode="light">
             <span class="modeIcon"><i class="fa-regular fa-moon"></i></span>
             <span class="modeText">Dark Mode</span>
         </div>
@@ -316,6 +333,36 @@
     }
     }
     getDataAndShow()
+
+
+    const modeSwitch = document.querySelector('nav .modeSwitch');
+
+    modeSwitch.addEventListener('click' , () => {
+        const root = document.querySelector(':root');
+        const modeText = document.querySelector('.modeText');
+        const modeIcon = document.querySelector('.modeIcon i');
+
+        if (modeSwitch.getAttribute('mode') == 'light') {
+            root.style.setProperty('--bg','var(--Very-Dark-Blue)')
+            root.style.setProperty('--elme','var(--Dark-Blue)')
+            root.style.setProperty('--textColor','var(--White)')
+            modeSwitch.setAttribute('mode' , 'dark')
+            modeIcon.classList = 'fa-regular fa-sun'
+            modeText.innerHTML = 'Light Mode'
+        } else {
+            root.style.setProperty('--bg', 'var(--Very-Light-Gray)')
+            root.style.setProperty('--elme', 'var(--White)')
+            root.style.setProperty('--textColor', 'var(--black)')
+            modeSwitch.setAttribute('mode', 'light')
+            modeIcon.classList = 'fa-regular fa-moon'
+            modeText.innerHTML = 'Dark Mode'
+        }
+    })
+
+
+
+
+
     </script>
 </body>
 </html>
